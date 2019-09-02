@@ -27,7 +27,10 @@ function loadDataTable() {
     });
 }
 
+
 $(document).ready(function () {
+    $('#telefone').mask('(99) 99999999?9');
+
     mostraTabela();
     $('#salvar').on('click', function () {
         limpaAlerta();
@@ -39,6 +42,7 @@ $(document).ready(function () {
             var nome = $('#nome').val();
             var email = $('#email').val();
             var acesso = $('#acesso').val();
+            var senha = $('#senha').val();
             var estado = $('#estado').val();
             var cidade = $('#cidade').val();
             var telefone = $('#telefone').val();
@@ -53,6 +57,7 @@ $(document).ready(function () {
                     nome: nome,
                     email: email,
                     acesso: acesso,
+                    senha: senha,
                     estado: estado,
                     cidade: cidade,
                     telefone: telefone
@@ -96,27 +101,20 @@ $(document).ready(function () {
                             mostraTabela();
                             if (response.status) {
                                 mostraTabela();
-
                             }
                         }
                     });
-
                 }
                 else{
                     bootbox.alert('Operação cancelada.');
                     mostraTabela();
                 }
-
             },
             buttons: {
                 cancel: {label: 'Cancelar',className:'btn-default'},
                 confirm: {label: 'EXCLUIR',className:'btn-danger'}
-
             }
         });
-
-
-
     });
 
     $(document).on('click', '.editar', function () {
@@ -142,5 +140,11 @@ $(document).ready(function () {
             }
         });
     });
+
+
+    $('#sair').on('click', function () {
+        window.location.href = 'logout.php';
+    });
+
 
 });

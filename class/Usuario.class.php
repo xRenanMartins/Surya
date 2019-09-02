@@ -19,6 +19,7 @@ class Usuario
     private $acesso;
     private $estado;
     private $cidade;
+    private $senha;
 
     /**
      * Usuario constructor.
@@ -30,7 +31,7 @@ class Usuario
      * @param $estado
      * @param $cidade
      */
-    public function __construct($id = null, $nome = null, $email = null, $telefone = null, $acesso = null, $estado = null, $cidade = null)
+    public function __construct($id = null, $nome = null, $email = null, $telefone = null, $acesso = null, $estado = null, $cidade = null, $senha = null)
     {
         $this->UsuarioDao = new UsuarioDao();
         $this->id = $id;
@@ -40,6 +41,7 @@ class Usuario
         $this->acesso = $acesso;
         $this->estado = $estado;
         $this->cidade = $cidade;
+        $this->senha = md5($senha);
     }
 
 
@@ -195,9 +197,9 @@ class Usuario
         return $this->UsuarioDao->listar();
     }
 
-    public function login($email, $senha)
+    public function login()
     {
-        return $this->UsuarioDao->login($email, $senha);
+        return $this->UsuarioDao->login($this->email, $this->senha);
     }
 
     public function logout()

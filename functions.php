@@ -7,11 +7,12 @@ if ($acao === "cadastrar" || $acao === "alterar") {
     $nome = (trim(strip_tags($_POST['nome'])));
     $email = (trim(strip_tags($_POST['email'])));
     $acesso = (trim(strip_tags($_POST['acesso'])));
+    $senha = (trim(strip_tags($_POST['senha'])));
     $estado = (trim(strip_tags($_POST['estado'])));
     $cidade = (trim(strip_tags($_POST['cidade'])));
     $telefone = (trim(strip_tags($_POST['telefone'])));
 
-    $usuario = new Usuario($id, $nome, $email, $telefone, $acesso, $estado, $cidade);
+    $usuario = new Usuario($id, $nome, $email, $telefone, $acesso, $estado, $cidade, $senha);
     $message = '<div class="alert alert-danger" role="alert">Erro ao cadastrar usuário!</div>';
     $status = false;
 
@@ -61,6 +62,19 @@ if ($acao === "cadastrar" || $acao === "alterar") {
     $usuario = new Usuario();
     $usuario->setId($id);
     $resultado = $usuario->procuraId();
+
+    echo json_encode($resultado);
+} else if ($acao === "logar") {
+    $email = (trim(strip_tags($_POST['email'])));
+    $senha = (trim(strip_tags($_POST['senha'])));
+
+    $usuario = new UsuarioDao();
+
+    $email = trim(strip_tags($_POST['email']));
+    $senha = trim(strip_tags($_POST['senha']));
+
+    $resultado = $usuario->login($email, $senha);
+
 
     echo json_encode($resultado);
 }

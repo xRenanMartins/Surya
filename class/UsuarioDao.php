@@ -20,7 +20,7 @@ class UsuarioDao
 
     public function cadastrar($values)
     {
-        $sql = "INSERT INTO usuario (nome, email, telefone, acesso, estado, cidade) VALUES ({$values})";
+        $sql = "INSERT INTO usuario (nome, email, telefone, acesso, senha, estado, cidade) VALUES ({$values})";
 
         return mysqli_query($this->conexao->getCon(), $sql);
     }
@@ -71,19 +71,26 @@ class UsuarioDao
     }
 
     public function login($email, $senha) {
-        //$senha = md5 ($senha);
-
+        $senha = md5($senha);
         $sql = "SELECT * FROM usuario WHERE email = '$email' AND senha = '$senha'";
 
         $executa = mysqli_query($this->conexao->getCon(), $sql);
+
         if(mysqli_num_rows($executa) > 0) {
-            return true;
+            session_start();
+            $_SESSION["email"] = $email;
+            $_SESSION["senha"] = $senha;
+            header('location: Cadastro.php');
+            exit();
+
         }
+        header('location:index.php?erro=senha');
         return false;
 
     }
 
-    public function logout() {
+    public function logout()
+    {
 
         session_start();
 
