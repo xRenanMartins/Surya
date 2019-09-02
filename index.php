@@ -33,7 +33,7 @@ if (isset($_POST['logar'])) {
     <?php if(isset($_GET['erro'])) {
         echo '<div class="alert alert-danger">Dados de login incorretos</div>';
     } ?>
-    <h2>SuryaDental - Login</h2>
+    <h2 class="text-center">SuryaDental - Login</h2>
     <hr>
     <form method="post">
         <div class="form-group">
