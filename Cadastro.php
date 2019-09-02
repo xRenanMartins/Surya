@@ -12,7 +12,7 @@
 <body>
 <div class="container jumbotron">
     <div class="col-md-12">
-        <h6>Olá! <?php echo $_SESSION['email']; ?> <button id="sair" type="button" class="btn btn-danger">Sair</button></h6>
+        <h6>Olá! <?php echo $_SESSION['nome']; ?> <button id="sair" type="button" class="btn btn-danger">Sair</button></h6>
 
     </div>
     <div class="col-md-12 text-center">

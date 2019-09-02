@@ -78,6 +78,9 @@ class UsuarioDao
 
         if(mysqli_num_rows($executa) > 0) {
             session_start();
+            while ($row = mysqli_fetch_assoc($executa)) {
+                $_SESSION["nome"] = $row['nome'];
+            }
             $_SESSION["email"] = $email;
             $_SESSION["senha"] = $senha;
             header('location: Cadastro.php');
